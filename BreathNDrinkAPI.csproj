@@ -19,4 +19,10 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="BreathNDrinkClassLibrary">
+      <HintPath>..\BreathNDrinkClassLibrary\bin\Debug\net5.0\BreathNDrinkClassLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
