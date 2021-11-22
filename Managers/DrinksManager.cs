@@ -10,14 +10,17 @@ namespace BreathNDrinkAPI.Managers
     {
         private static List<Drink> _drinksList = new();
 
-        public static void AddDrink(Drink drink)
+        public static Drink AddDrink(Drink drink)
         {
             _drinksList.Add(drink);
+            return drink;
         }
 
-        public static void RemoveDrink(string drinkId)
+        public static Drink RemoveDrink(string drinkId)
         {
-            _drinksList.Remove(_drinksList.Find(d => d.DrinkId.Equals(drinkId)));
+            Drink d = _drinksList.Find(D => D.DrinkId == drinkId);
+            _drinksList.Remove(_drinksList.Find(d => d.DrinkId == drinkId));
+            return d;
         }
 
         public static List<Drink> GetAllDrinks()
