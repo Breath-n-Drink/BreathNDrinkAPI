@@ -19,5 +19,17 @@ namespace BreathNDrinkAPI.Managers
         {
             _drinksList.Remove(_drinksList.Find(d => d.DrinkId.Equals(drinkId)));
         }
+
+        public static List<Drink> GetAllDrinks()
+        {
+            return new List<Drink>(_drinksList);
+        }
+
+        public static Drink FindById(string id)
+        {
+            return _drinksList.Find(drink => drink.DrinkId == id);
+        }
+
+        
     }
 }

@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="BreathNDrinkClassLibrary">
       <HintPath>..\ClassLibrary\obj\Debug\net5.0\BreathNDrinkClassLibrary.dll</HintPath>
     </Reference>
