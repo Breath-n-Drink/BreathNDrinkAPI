@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <Reference Include="BreathNDrinkClassLibrary">
-      <HintPath>..\ClassLibrary\obj\Debug\net5.0\BreathNDrinkClassLibrary.dll</HintPath>
+      <HintPath>BreathNDrinkClassLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
 
