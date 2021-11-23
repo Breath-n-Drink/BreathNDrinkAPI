@@ -1,3 +1,4 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BreathNDrinkAPITests
@@ -8,6 +9,7 @@ namespace BreathNDrinkAPITests
         [TestMethod]
         public void TestMethod1()
         {
+            Console.WriteLine("test");
         }
     }
 }
