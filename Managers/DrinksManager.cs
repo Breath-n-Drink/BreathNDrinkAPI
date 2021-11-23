@@ -29,9 +29,20 @@ namespace BreathNDrinkAPI.Managers
             return new List<Drink>(_drinksList);
         }
 
-        public static Drink FindById(string id)
+        public static List<Drink> Get(string id = null, string name = null)
         {
-            return DrinksRetriever.GetDrinkByIdAsync(id).Result;
+            List<Drink> drinksList = new();
+
+            if (id != null)
+            {
+                drinksList.Add(DrinksRetriever.GetDrinkByIdAsync(id).Result);
+                return drinksList;
+            }
+
+            if (name != null)
+                drinksList = DrinksRetriever.GetDrinksByNameAsync(name).Result;
+
+            return drinksList;
         }
     }
 }

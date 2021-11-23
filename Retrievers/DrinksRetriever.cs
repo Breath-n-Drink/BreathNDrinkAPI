@@ -13,18 +13,25 @@ namespace BreathNDrinkAPI.Retrievers
 {
     public static class DrinksRetriever
     {
-        private static HttpClient client = new HttpClient();
+        private static HttpClient client = new ();
         private static string path = "http://www.thecocktaildb.com/api/json/v1/1/";
 
-        public static async Task<Drink> GetDrinkByNameAsync(string name)
+        public static async Task<List<Drink>> GetDrinksByNameAsync(string name)
         {
             HttpResponseMessage response = await client.GetAsync(path + $"search.php?s={name}");
-            Drink receivedDrink = new Drink();
+            TempDrinkList tempDrinkList = null;
             if (response.IsSuccessStatusCode)
             {
-                receivedDrink = await response.Content.ReadFromJsonAsync<Drink>();
+                tempDrinkList = await response.Content.ReadFromJsonAsync<TempDrinkList>();
             }
-            return receivedDrink;
+
+            List<Drink> drinkList = new List<Drink>();
+            foreach (TempDrink tD in tempDrinkList.Drinks)
+            {
+                drinkList.Add(ConvertDrink(tD));
+            }
+
+            return drinkList;
         }
 
         public static async Task<Drink> GetDrinkByIdAsync(string id)
@@ -39,47 +46,54 @@ namespace BreathNDrinkAPI.Retrievers
 
             tempDrink = tempDrinkList.Drinks.First();
 
+            return ConvertDrink(tempDrink);
+        }
+
+        public static Drink ConvertDrink(TempDrink tD)
+        {
             Drink drink = new Drink();
-            if (tempDrink.StrAlcoholic == "Alcoholic")
+
+            if (tD.StrAlcoholic == "Alcoholic")
                 drink.Alcoholic = true;
             else
                 drink.Alcoholic = false;
 
-            drink.DrinkId = tempDrink.IdDrink;
-            drink.Name = tempDrink.StrDrink;
-            drink.ImgThumbUrl = tempDrink.StrDrinkThumb;
-            drink.Instructions = tempDrink.StrInstructions;
+            drink.DrinkId = tD.IdDrink;
+            drink.Name = tD.StrDrink;
+            drink.ImgThumbUrl = tD.StrDrinkThumb;
+            drink.Instructions = tD.StrInstructions;
 
-            if (tempDrink.StrIngredient1 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient1, tempDrink.StrMeasure1);
-            if (tempDrink.StrIngredient2 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient2, tempDrink.StrMeasure2);
-            if (tempDrink.StrIngredient3 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient3, tempDrink.StrMeasure3);
-            if (tempDrink.StrIngredient4 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient4, tempDrink.StrMeasure4);
-            if (tempDrink.StrIngredient5 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient5, tempDrink.StrMeasure5);
-            if (tempDrink.StrIngredient6 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient6, tempDrink.StrMeasure6);
-            if (tempDrink.StrIngredient7 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient7, tempDrink.StrMeasure7);
-            if (tempDrink.StrIngredient8 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient8, tempDrink.StrMeasure8);
-            if (tempDrink.StrIngredient9 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient9, tempDrink.StrMeasure9);
-            if (tempDrink.StrIngredient10 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient10, tempDrink.StrMeasure10);
-            if (tempDrink.StrIngredient11 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient11, tempDrink.StrMeasure11);
-            if (tempDrink.StrIngredient12 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient12, tempDrink.StrMeasure12);
-            if (tempDrink.StrIngredient13 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient13, tempDrink.StrMeasure13);
-            if (tempDrink.StrIngredient14 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient14, tempDrink.StrMeasure14);
-            if (tempDrink.StrIngredient15 == null) return drink;
-            drink.AddIngredientAndMeasurement(tempDrink.StrIngredient15, tempDrink.StrMeasure15);
+            if (tD.StrIngredient1 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient1, tD.StrMeasure1);
+            if (tD.StrIngredient2 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient2, tD.StrMeasure2);
+            if (tD.StrIngredient3 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient3, tD.StrMeasure3);
+            if (tD.StrIngredient4 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient4, tD.StrMeasure4);
+            if (tD.StrIngredient5 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient5, tD.StrMeasure5);
+            if (tD.StrIngredient6 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient6, tD.StrMeasure6);
+            if (tD.StrIngredient7 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient7, tD.StrMeasure7);
+            if (tD.StrIngredient8 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient8, tD.StrMeasure8);
+            if (tD.StrIngredient9 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient9, tD.StrMeasure9);
+            if (tD.StrIngredient10 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient10, tD.StrMeasure10);
+            if (tD.StrIngredient11 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient11, tD.StrMeasure11);
+            if (tD.StrIngredient12 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient12, tD.StrMeasure12);
+            if (tD.StrIngredient13 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient13, tD.StrMeasure13);
+            if (tD.StrIngredient14 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient14, tD.StrMeasure14);
+            if (tD.StrIngredient15 == null) return drink;
+            drink.AddIngredientAndMeasurement(tD.StrIngredient15, tD.StrMeasure15);
+
             return drink;
         }
     }
