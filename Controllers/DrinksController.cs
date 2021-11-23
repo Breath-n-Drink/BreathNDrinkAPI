@@ -15,17 +15,17 @@ namespace BreathNDrinkAPI.Controllers
     [ApiController]
     public class DrinksController : ControllerBase
     {
-        [HttpPost]
-        public void Post([FromBody] Drink value)
-        { 
-            DrinksManager.AddDrink(value);
-        }
+        //[HttpPost]
+        //public void Post([FromBody] Drink value)
+        //{ 
+        //    DrinksManager.AddDrink(value);
+        //}
 
-        [HttpDelete]
-        public void Delete([FromBody] string value)
-        {
-            DrinksManager.RemoveDrink(value);
-        }
+        //[HttpDelete]
+        //public void Delete([FromBody] string value)
+        //{
+        //    DrinksManager.RemoveDrink(value);
+        //}
 
         [HttpGet]
         public List<Drink> Get([FromQuery] string id, [FromQuery] string name)
