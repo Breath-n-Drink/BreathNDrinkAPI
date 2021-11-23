@@ -44,9 +44,13 @@ namespace BreathNDrinkAPI.Retrievers
                 tempDrinkList = await response.Content.ReadFromJsonAsync<TempDrinkList>();
             }
 
-            tempDrink = tempDrinkList.Drinks.First();
+            if (tempDrinkList.Drinks != null)
+            {
+                tempDrink = tempDrinkList.Drinks.First();
+                return ConvertDrink(tempDrink);
+            }
 
-            return ConvertDrink(tempDrink);
+            return null;
         }
 
         public static Drink ConvertDrink(TempDrink tD)

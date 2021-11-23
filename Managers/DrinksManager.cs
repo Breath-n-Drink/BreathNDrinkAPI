@@ -30,7 +30,9 @@ namespace BreathNDrinkAPI.Managers
 
             if (id != null)
             {
-                drinksList.Add(DrinksRetriever.GetDrinkByIdAsync(id).Result);
+                Drink newDrink = DrinksRetriever.GetDrinkByIdAsync(id).Result;
+                if (newDrink != null)
+                    drinksList.Add(DrinksRetriever.GetDrinkByIdAsync(id).Result);
                 return drinksList;
             }
 
