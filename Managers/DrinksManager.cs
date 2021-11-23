@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BreathNDrinkAPI.Retrievers;
 using BreathNDrinkClassLibrary;
 
 namespace BreathNDrinkAPI.Managers
@@ -30,9 +31,7 @@ namespace BreathNDrinkAPI.Managers
 
         public static Drink FindById(string id)
         {
-            return _drinksList.Find(drink => drink.DrinkId == id);
+            return DrinksRetriever.GetDrinkByIdAsync(id).Result;
         }
-
-        
     }
 }

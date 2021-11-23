@@ -15,11 +15,11 @@ namespace BreathNDrinkAPI.Controllers
     [ApiController]
     public class DrinksController : ControllerBase
     {
-        [HttpGet]
-        public IEnumerable<Drink> Get()
-        {
-            return DrinksManager.GetAllDrinks();
-        }
+        //[HttpGet]
+        //public IEnumerable<Drink> Get()
+        //{
+        //    return DrinksManager.GetAllDrinks();
+        //}
 
         [HttpPost]
         public void Post([FromBody] Drink value)
@@ -34,7 +34,7 @@ namespace BreathNDrinkAPI.Controllers
         }
 
         [HttpGet]
-        public Drink FindById(string id)
+        public Drink Get([FromQuery] string id)
         {
             return DrinksManager.FindById(id);
         }
