@@ -34,7 +34,6 @@ namespace BreathNDrinkAPI.Retrievers
             TempDrink tempDrink = new();
             if (response.IsSuccessStatusCode)
             {
-                //tempDrinkList = JsonSerializer.Deserialize<TempDrinkList>(response.Content.ReadAsStringAsync().Result);
                 tempDrinkList = await response.Content.ReadFromJsonAsync<TempDrinkList>();
             }
 
