@@ -15,12 +15,6 @@ namespace BreathNDrinkAPI.Controllers
     [ApiController]
     public class DrinksController : ControllerBase
     {
-        //[HttpGet]
-        //public IEnumerable<Drink> Get()
-        //{
-        //    return DrinksManager.GetAllDrinks();
-        //}
-
         [HttpPost]
         public void Post([FromBody] Drink value)
         { 

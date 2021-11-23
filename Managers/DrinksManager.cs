@@ -23,12 +23,7 @@ namespace BreathNDrinkAPI.Managers
             _drinksList.Remove(_drinksList.Find(d => d.DrinkId == drinkId));
             return d;
         }
-
-        public static List<Drink> GetAllDrinks()
-        {
-            return new List<Drink>(_drinksList);
-        }
-
+        
         public static List<Drink> Get(string id = null, string name = null)
         {
             List<Drink> drinksList = new();
