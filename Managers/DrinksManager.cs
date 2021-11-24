@@ -9,8 +9,6 @@ namespace BreathNDrinkAPI.Managers
 {
     public static class DrinksManager
     {
-        //private static List<Drink> _drinksList = new();
-
         //public static Drink AddDrink(Drink drink)
         //{
         //    _drinksList.Add(drink);
@@ -32,12 +30,11 @@ namespace BreathNDrinkAPI.Managers
             {
                 Drink newDrink = DrinksRetriever.GetDrinkByIdAsync(id).Result;
                 if (newDrink != null)
-                    drinksList.Add(DrinksRetriever.GetDrinkByIdAsync(id).Result);
+                    drinksList.Add(newDrink);
                 return drinksList;
             }
-
-            if (name != null)
-                drinksList = DrinksRetriever.GetDrinksByNameAsync(name).Result;
+            
+            drinksList = DrinksRetriever.GetDrinksByNameAsync(name).Result;
 
             return drinksList;
         }

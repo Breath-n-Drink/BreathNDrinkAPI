@@ -14,7 +14,7 @@ namespace BreathNDrinkAPI.Retrievers
     public static class DrinksRetriever
     {
         private static HttpClient client = new ();
-        private static string path = "http://www.thecocktaildb.com/api/json/v1/1/";
+        private static string path = "http://www.thecocktaildb.com/api/json/v2/9973533/";
 
         public static async Task<List<Drink>> GetDrinksByNameAsync(string name)
         {
