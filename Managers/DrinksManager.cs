@@ -22,7 +22,7 @@ namespace BreathNDrinkAPI.Managers
         //    return d;
         //}
 
-        private const double MaxBAC = 1.0;
+        private const double MaxBAC = 6.0;
         private const double BWRatio = 0.68;
         
         public static List<Drink> Get(string id = null, string name = null, double bodyWeight = 0.0, double bloodAlcCon = 0.0)
