@@ -28,9 +28,9 @@ namespace BreathNDrinkAPI.Controllers
         //}
 
         [HttpGet]
-        public List<Drink> Get([FromQuery] string id, [FromQuery] string name)
+        public List<Drink> Get([FromQuery] string id, [FromQuery] string name, [FromQuery] double bodyWeight, [FromQuery] double bloodAlcCon)
         {
-            return DrinksManager.Get(id, name);
+            return DrinksManager.Get(id, name, bodyWeight, bloodAlcCon);
         }
     }
 }
