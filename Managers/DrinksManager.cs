@@ -21,11 +21,8 @@ namespace BreathNDrinkAPI.Managers
         //    _drinksList.Remove(_drinksList.Find(d => d.DrinkId == drinkId));
         //    return d;
         //}
-
-        private const double MaxBAC = 6.0;
-        private const double BWRatio = 0.68;
         
-        public static List<Drink> Get(string id = null, string name = null, double bodyWeight = 0.0, double bloodAlcCon = 0.0)
+        public static List<Drink> Get(string id = null, string name = null, double bodyWeight = 0.0, double bloodAlcCon = 0.0, double maxBACRequest = 1.5, int gender = 0)
         {
             List<Drink> drinksList = new();
 
@@ -40,7 +37,23 @@ namespace BreathNDrinkAPI.Managers
             drinksList = DrinksRetriever.GetDrinksByNameAsync(name).Result;
 
             if (bodyWeight > 0.0)
-                drinksList = drinksList.FindAll(d => ((d.TotalAlcVolume * 0.78945) <= (MaxBAC-bloodAlcCon) * (BWRatio * bodyWeight)) && d.TotalVolume > 0.0);
+            {
+                double bwRatio;
+                switch (gender)
+                {
+                    case 1:
+                        bwRatio = 0.68;
+                        break;
+                    case 2:
+                        bwRatio = 0.55;
+                        break;
+                    default:
+                        bwRatio = 0.6;
+                        break;
+                }
+
+                drinksList = drinksList.FindAll(d => ((d.TotalAlcVolume * 0.78945) <= (maxBACRequest-bloodAlcCon) * (bwRatio * bodyWeight)) && d.TotalVolume > 0.0);
+            }
             
             return drinksList;
         }
