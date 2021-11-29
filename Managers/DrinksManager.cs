@@ -31,12 +31,12 @@ namespace BreathNDrinkAPI.Managers
                 Drink newDrink = DrinksRetriever.GetDrinkByIdAsync(id).Result;
                 if (newDrink != null)
                     drinksList.Add(newDrink);
+                drinksList = drinksList.FindAll(d => d.TotalVolume > 0.0 && d.AlcoholPercentage >= 0.0);
                 return drinksList;
             }
 
             drinksList = DrinksRetriever.GetDrinksByNameAsync(name).Result;
-
-            
+            drinksList = drinksList.FindAll(d => d.TotalVolume > 0.0 && d.AlcoholPercentage >= 0.0);
 
             if (bodyWeight > 0.0 && bloodAlcCon > 0.0 && maxBacRequest > 0.0)
             {
@@ -54,7 +54,7 @@ namespace BreathNDrinkAPI.Managers
                         break;
                 }
 
-                drinksList = drinksList.FindAll(d => ((d.TotalAlcVolume * 0.78945) <= (maxBacRequest-bloodAlcCon) * (bwRatio * bodyWeight)) && d.TotalVolume > 0.0);
+                drinksList = drinksList.FindAll(d => ((d.TotalAlcVolume * 0.78945) <= (maxBacRequest-bloodAlcCon) * (bwRatio * bodyWeight)) || !d.Alcoholic);
             }
             
             return drinksList;

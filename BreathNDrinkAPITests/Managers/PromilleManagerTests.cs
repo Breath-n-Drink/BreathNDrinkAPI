@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BreathNDrinkAPI.Managers.Tests
+namespace BreathNDrinkAPITests.Managers
 {
     [TestClass()]
     public class PromilleManagerTests
