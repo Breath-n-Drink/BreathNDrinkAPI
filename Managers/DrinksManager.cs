@@ -33,10 +33,12 @@ namespace BreathNDrinkAPI.Managers
                     drinksList.Add(newDrink);
                 return drinksList;
             }
-            
+
             drinksList = DrinksRetriever.GetDrinksByNameAsync(name).Result;
 
-            if (bodyWeight > 0.0)
+            
+
+            if (bodyWeight > 0.0 && bloodAlcCon > 0.0 && maxBacRequest > 0.0)
             {
                 double bwRatio;
                 switch (gender)
