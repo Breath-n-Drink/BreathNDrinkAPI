@@ -38,7 +38,7 @@ namespace BreathNDrinkAPI.Managers
             drinksList = DrinksRetriever.GetDrinksByNameAsync(name).Result;
             drinksList = drinksList.FindAll(d => d.TotalVolume > 0.0 && d.AlcoholPercentage >= 0.0);
 
-            if (bodyWeight > 0.0 && bloodAlcCon > 0.0 && maxBacRequest > 0.0)
+            if (bodyWeight > 0.0 && bloodAlcCon >= 0.0 && maxBacRequest >= 0.0)
             {
                 double bwRatio;
                 switch (gender)
