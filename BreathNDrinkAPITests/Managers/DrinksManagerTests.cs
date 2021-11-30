@@ -68,5 +68,23 @@ namespace BreathNDrinkAPITests.Managers
 
             Assert.IsTrue(drinks.Count == 0);
         }
+
+        [TestMethod]
+        public void AlcoholPctInvalidIntervalTest()
+        {
+            List<Drink> drinks = DrinksManager.Get(minAlcPer: 80, maxAlcPer: 70);
+
+            Assert.IsTrue(drinks.Count == 0);
+        }
+
+        [TestMethod]
+        public void AlcoholPctValidIntervalTest()
+        {
+            List<Drink> drinks = DrinksManager.Get(minAlcPer: 20, maxAlcPer: 40);
+
+            List<Drink> drinksFiltered = drinks.FindAll(d => d.AlcoholPercentage >= 0.2 && d.AlcoholPercentage <= 0.4);
+
+            Assert.AreEqual(drinks.Count, drinksFiltered.Count);
+        }
     }
 }
