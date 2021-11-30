@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using BreathNDrinkAPI.Managers;
@@ -40,7 +41,11 @@ namespace BreathNDrinkAPITests.Managers
         [TestMethod]
         public void IngredientFilterTest()
         {
-            string[] ingredients = new[] {"Vodka", };
+            string[] ingredients = new[] {"Gin", "Light rum", "Tequila", "Triple sec", "Vodka", "Coca-Cola", "Sweet and sour", "Bitters", "Lemon"};
+
+            List<Drink> drinks = DrinksManager.Get(ingredients: ingredients);
+
+            Assert.AreEqual(1, drinks.Count);
         }
     }
 }
