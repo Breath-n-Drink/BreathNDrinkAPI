@@ -37,6 +37,10 @@ namespace BreathNDrinkAPITests.Managers
 
             Assert.AreEqual(drinksBefore.Count, drinksAfter.Count);
         }
-        //Test
+        [TestMethod]
+        public void IngredientFilterTest()
+        {
+            string[] ingredients = new[] {"Vodka", };
+        }
     }
 }
