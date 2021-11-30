@@ -38,14 +38,35 @@ namespace BreathNDrinkAPITests.Managers
 
             Assert.AreEqual(drinksBefore.Count, drinksAfter.Count);
         }
+
         [TestMethod]
-        public void IngredientFilterTest()
+        public void IngredientFilterFind1Test()
         {
             string[] ingredients = new[] {"Gin", "Light rum", "Tequila", "Triple sec", "Vodka", "Coca-Cola", "Sweet and sour", "Bitters", "Lemon"};
 
             List<Drink> drinks = DrinksManager.Get(ingredients: ingredients);
 
             Assert.AreEqual(1, drinks.Count);
+        }
+
+        [TestMethod]
+        public void IngredientFilterFindManyTest()
+        {
+            string[] ingredients = { "Gin" };
+
+            List<Drink> drinks = DrinksManager.Get(ingredients: ingredients);
+            
+            Assert.IsTrue(drinks.Count > 0);
+        }
+
+        [TestMethod]
+        public void IngredientFilterFindNoneTest()
+        {
+            string[] ingredients = { "dlkfjlkdjlfkjdlfjlu83748738479879432" };
+
+            List<Drink> drinks = DrinksManager.Get(ingredients: ingredients);
+
+            Assert.IsTrue(drinks.Count == 0);
         }
     }
 }
