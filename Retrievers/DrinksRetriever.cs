@@ -41,7 +41,14 @@ namespace BreathNDrinkAPI.Retrievers
             TempDrink tempDrink = new();
             if (response.IsSuccessStatusCode)
             {
-                tempDrinkList = await response.Content.ReadFromJsonAsync<TempDrinkList>();
+                try
+                {
+                    tempDrinkList = await response.Content.ReadFromJsonAsync<TempDrinkList>();
+                }
+                catch (JsonException)
+                {
+                    return null;
+                }
             }
 
             if (tempDrinkList.Drinks != null)

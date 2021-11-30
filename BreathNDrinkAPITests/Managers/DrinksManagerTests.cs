@@ -14,11 +14,19 @@ namespace BreathNDrinkAPITests.Managers
     public class DrinksManagerTests
     {
         [TestMethod]
-        public void GetByIdTest()
+        public void GetByValidIdTest()
         {
             Drink margarita = DrinksManager.Get(id:"11007").First();
 
             Assert.AreEqual("Margarita", margarita.Name);
+        }
+
+        [TestMethod]
+        public void GetByInvalidIdTest()
+        {
+            List<Drink> drinks = DrinksManager.Get(id: "kdjfkdjfk3434");
+
+            Assert.AreEqual(0, drinks.Count);
         }
 
         [TestMethod]
