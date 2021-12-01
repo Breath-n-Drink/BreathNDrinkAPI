@@ -15,6 +15,7 @@ namespace BreathNDrinkAPI.Models
 
         public int Id { get; set; }
         public string Name { get; set; }
+        public double? MaxPromille { get; set; }
 
         public virtual ICollection<Promille> Promille { get; set; }
     }

@@ -20,13 +20,14 @@ namespace BreathNDrinkAPI.Models
 
         public virtual DbSet<Drinkers> Drinkers { get; set; }
         public virtual DbSet<Promille> Promille { get; set; }
+        public virtual DbSet<Ratings> Ratings { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=eksamenprojekt3sem.database.windows.net;Initial Catalog=BreathNDrink;User ID=gruppe2;Password=!SuperPassword");
+                optionsBuilder.UseSqlServer("Data Source=eksamenprojekt3sem.database.windows.net;Initial Catalog=BreathNDrink;Persist Security Info=True;User ID=gruppe2;Password=!SuperPassword");
             }
         }
 
@@ -55,6 +56,12 @@ namespace BreathNDrinkAPI.Models
                     .HasForeignKey(d => d.DrinkerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Promille__Drinke__02FC7413");
+            });
+
+            modelBuilder.Entity<Ratings>(entity =>
+            {
+                entity.HasKey(e => e.RatingId)
+                    .HasName("PK__Table__FCCDF87C7F444D95");
             });
 
             OnModelCreatingPartial(modelBuilder);
