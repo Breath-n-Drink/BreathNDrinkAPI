@@ -28,9 +28,9 @@ namespace BreathNDrinkAPI.Controllers
         //}
 
         [HttpGet]
-        public List<Drink> Get([FromQuery] string id, [FromQuery] string name, [FromQuery] double bodyWeight, [FromQuery] double bloodAlcCon, [FromQuery] double maxBacRequest, [FromQuery] int gender, [FromQuery] string[] ingredients, [FromQuery] double minAlcPer, [FromQuery] double maxAlcPer = 100)
+        public List<Drink> Get([FromQuery] string id, [FromQuery] string name, [FromQuery] double bodyWeight, [FromQuery] double bloodAlcCon, [FromQuery] double maxBacRequest, [FromQuery] int gender, [FromQuery] string[] ingredients, [FromQuery] string[] notFilter, [FromQuery] double minAlcPer, [FromQuery] double maxAlcPer = 100)
         {
-            return DrinksManager.Get(id, name, bodyWeight, bloodAlcCon, maxBacRequest, gender, ingredients, minAlcPer, maxAlcPer);
+            return DrinksManager.Get(id, name, bodyWeight, bloodAlcCon, maxBacRequest, gender, ingredients, notFilter, minAlcPer, maxAlcPer);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace BreathNDrinkAPI.Managers
         //    return d;
         //}
         
-        public static List<Drink> Get(string id = null, string name = null, double bodyWeight = 0.0, double bloodAlcCon = 0.0, double maxBacRequest = 1.5, int gender = 0, string[] ingredients = null, double minAlcPer = 0, double maxAlcPer = 100)
+        public static List<Drink> Get(string id = null, string name = null, double bodyWeight = 0.0, double bloodAlcCon = 0.0, double maxBacRequest = 1.5, int gender = 0, string[] ingredients = null, string[] notFilter = null, double minAlcPer = 0, double maxAlcPer = 100)
         {
             List<Drink> drinksList = new();
 
@@ -61,7 +61,16 @@ namespace BreathNDrinkAPI.Managers
             {
                 foreach (var item in ingredients)
                 {
-                    drinksList = drinksList.FindAll(d => d.IngredientList.Contains(item));
+                    drinksList = drinksList.FindAll(d => (d.IngredientList.Any(i => (i.ToLower().IndexOf(item.ToLower()) > 0) || i.ToLower().Contains(item.ToLower()))));
+                }
+            }
+
+            if (notFilter != null)
+            {
+                foreach (var item in notFilter)
+                {
+
+                    drinksList = drinksList.FindAll(d => !d.IngredientList.Any((i => (i.ToLower().IndexOf(item.ToLower()) > 0) || i.ToLower().Contains(item.ToLower()))));
                 }
             }
 
