@@ -12,7 +12,6 @@ namespace BreathNDrinkAPI.Controllers
     {
         private readonly PromilleManager _manager = new PromilleManager();
         // GET: api/<PromilleController>
-        [EnableCors("allowAll")]
         [HttpGet]
         public double Get()
         {
