@@ -84,17 +84,21 @@ namespace BreathNDrinkAPI.Managers
 
         public static void AddRating(int id, int drinkerId, int rating)
         {
-            var result = _dbContext.Ratings.FirstOrDefault(r => r.DrinkerId == drinkerId && r.DrinkId == id);
-            if (result == null)
+            if (drinkerId is not 0)
             {
-                Ratings newRating = (new Ratings { DrinkId = id, DrinkerId = drinkerId, RatingValue = rating });
-                _dbContext.Ratings.Add(newRating);
+                var result = _dbContext.Ratings.FirstOrDefault(r => r.DrinkerId == drinkerId && r.DrinkId == id);
+                if (result == null)
+                {
+                    Ratings newRating = (new Ratings { DrinkId = id, DrinkerId = drinkerId, RatingValue = rating });
+                    _dbContext.Ratings.Add(newRating);
+                }
+                else
+                {
+                    result.RatingValue = rating;
+                }
+                _dbContext.SaveChanges();
             }
-            else
-            {
-                result.RatingValue = rating;
-            }
-            _dbContext.SaveChanges();
+            
         }
     }
 }

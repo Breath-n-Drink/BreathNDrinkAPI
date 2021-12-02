@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using BreathNDrinkAPI.Managers;
 using BreathNDrinkClassLibrary;
 using BreathNDrinkAPI.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace BreathNDrinkAPI.Controllers
 {
@@ -17,9 +18,19 @@ namespace BreathNDrinkAPI.Controllers
     public class DrinksController : ControllerBase
     {
         [HttpPost]
-        public void AddRating([FromQuery]int id, int drinkerId, int rating)
+        [EnableCors("allowAll")]
+        public ActionResult AddRating([FromQuery]int id, int drinkerId, int rating)
         {
-            DrinksManager.AddRating(id, drinkerId, rating);
+            if (drinkerId == 0)
+            {
+                return NotFound(drinkerId);
+            }
+            else
+            {
+                DrinksManager.AddRating(id, drinkerId, rating);
+                return Ok();
+            }
+
         }
 
         //[HttpDelete]
