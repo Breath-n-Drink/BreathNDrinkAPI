@@ -89,11 +89,12 @@ namespace BreathNDrinkAPI.Managers
                 if (r.DrinkerId == drinkerId && r.DrinkId == id)
                 {
                     r.RatingValue = rating;
-                    _dbContext.SaveChanges();
+                } else
+                {
+                    Ratings result = (new Ratings { DrinkId = id, DrinkerId = drinkerId, RatingValue = rating });
+                    _dbContext.Ratings.Add(result);
                 }
             }
-            Ratings result = (new Ratings { DrinkId = id, DrinkerId = drinkerId, RatingValue = rating });
-            _dbContext.Ratings.Add(result);
             _dbContext.SaveChanges();
         }
     }
