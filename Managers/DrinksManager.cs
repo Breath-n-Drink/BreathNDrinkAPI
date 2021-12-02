@@ -82,9 +82,17 @@ namespace BreathNDrinkAPI.Managers
         }
 
 
-        public static void AddRating(int id, int rating)
+        public static void AddRating(int id, int drinkerId, int rating)
         {
-            Ratings result = (new Ratings { DrinkId = id, SessionId = 1, RatingValue = rating });
+            foreach (var r in _dbContext.Ratings)
+            {
+                if (r.DrinkerId == drinkerId && r.DrinkId == id)
+                {
+                    r.RatingValue = rating;
+                    _dbContext.SaveChanges();
+                }
+            }
+            Ratings result = (new Ratings { DrinkId = id, DrinkerId = drinkerId, RatingValue = rating });
             _dbContext.Ratings.Add(result);
             _dbContext.SaveChanges();
         }

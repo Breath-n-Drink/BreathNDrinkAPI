@@ -17,9 +17,9 @@ namespace BreathNDrinkAPI.Controllers
     public class DrinksController : ControllerBase
     {
         [HttpPost]
-        public void AddRating([FromQuery]int id, int rating)
+        public void AddRating([FromQuery]int id, int drinkerId, int rating)
         {
-            DrinksManager.AddRating(id, rating);
+            DrinksManager.AddRating(id, drinkerId, rating);
         }
 
         //[HttpDelete]
