@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BreathNDrinkAPI.Models;
 using BreathNDrinkAPI.Retrievers;
 using BreathNDrinkClassLibrary;
 
@@ -9,6 +10,7 @@ namespace BreathNDrinkAPI.Managers
 {
     public static class DrinksManager
     {
+        private static BreathndrinkContext _dbContext = new BreathndrinkContext();
         //public static Drink AddDrink(Drink drink)
         //{
         //    _drinksList.Add(drink);
@@ -21,7 +23,7 @@ namespace BreathNDrinkAPI.Managers
         //    _drinksList.Remove(_drinksList.Find(d => d.DrinkId == drinkId));
         //    return d;
         //}
-        
+
         public static List<Drink> Get(string id = null, string name = null, double bodyWeight = 0.0, double bloodAlcCon = 0.0, double maxBacRequest = 1.5, int gender = 0, string[] ingredients = null, string[] notFilter = null, double minAlcPer = 0, double maxAlcPer = 100)
         {
             List<Drink> drinksList = new();
@@ -77,6 +79,14 @@ namespace BreathNDrinkAPI.Managers
             drinksList = drinksList.FindAll(d => ((d.AlcoholPercentage * 100) > minAlcPer) && ((d.AlcoholPercentage * 100) < maxAlcPer));
 
             return drinksList;
+        }
+
+
+        public static void AddRating(int id, int rating)
+        {
+            Ratings result = (new Ratings { DrinkId = id, SessionId = 1, RatingValue = rating });
+            _dbContext.Ratings.Add(result);
+            _dbContext.SaveChanges();
         }
     }
 }

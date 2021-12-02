@@ -8,6 +8,7 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using BreathNDrinkAPI.Managers;
 using BreathNDrinkClassLibrary;
+using BreathNDrinkAPI.Models;
 
 namespace BreathNDrinkAPI.Controllers
 {
@@ -15,11 +16,11 @@ namespace BreathNDrinkAPI.Controllers
     [ApiController]
     public class DrinksController : ControllerBase
     {
-        //[HttpPost]
-        //public void Post([FromBody] Drink value)
-        //{ 
-        //    DrinksManager.AddDrink(value);
-        //}
+        [HttpPost]
+        public void AddRating([FromQuery]int id, int rating)
+        {
+            DrinksManager.AddRating(id, rating);
+        }
 
         //[HttpDelete]
         //public void Delete([FromBody] string value)
