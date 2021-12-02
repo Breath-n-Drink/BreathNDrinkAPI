@@ -37,6 +37,7 @@ namespace BreathNDrinkAPI.Managers
             _dbContext.Drinkers.Update(drinker);
             _dbContext.SaveChanges();
         }
+        //hehj
     }
 
 }
