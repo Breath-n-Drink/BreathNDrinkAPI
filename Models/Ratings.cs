@@ -10,7 +10,9 @@ namespace BreathNDrinkAPI.Models
     {
         public int RatingId { get; set; }
         public int DrinkId { get; set; }
-        public int SessionId { get; set; }
         public int RatingValue { get; set; }
+        public int DrinkerId { get; set; }
+
+        public virtual Drinkers Drinker { get; set; }
     }
 }

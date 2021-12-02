@@ -11,6 +11,7 @@ namespace BreathNDrinkAPI.Models
         public Drinkers()
         {
             Promille = new HashSet<Promille>();
+            Ratings = new HashSet<Ratings>();
         }
 
         public int Id { get; set; }
@@ -18,5 +19,6 @@ namespace BreathNDrinkAPI.Models
         public double? MaxPromille { get; set; }
 
         public virtual ICollection<Promille> Promille { get; set; }
+        public virtual ICollection<Ratings> Ratings { get; set; }
     }
 }

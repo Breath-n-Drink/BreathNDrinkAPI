@@ -27,7 +27,7 @@ namespace BreathNDrinkAPI.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=eksamenprojekt3sem.database.windows.net;Initial Catalog=BreathNDrink;Persist Security Info=True;User ID=gruppe2;Password=!SuperPassword");
+                optionsBuilder.UseSqlServer("Data Source=eksamenprojekt3sem.database.windows.net;Initial Catalog=BreathNDrink;User ID=gruppe2;Password=!SuperPassword;Connect Timeout=30;Encrypt=True");
             }
         }
 
@@ -62,6 +62,12 @@ namespace BreathNDrinkAPI.Models
             {
                 entity.HasKey(e => e.RatingId)
                     .HasName("PK__Table__FCCDF87C7F444D95");
+
+                entity.HasOne(d => d.Drinker)
+                    .WithMany(p => p.Ratings)
+                    .HasForeignKey(d => d.DrinkerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Ratings__Drinker__2739D489");
             });
 
             OnModelCreatingPartial(modelBuilder);
