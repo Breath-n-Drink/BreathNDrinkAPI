@@ -81,9 +81,9 @@ namespace BreathNDrinkAPI.Managers
             if (sortByRating > 0)
             {
                 if (sortByRating == 1)
-                    drinksList.OrderBy(d => d.Rating);
+                    drinksList = drinksList.OrderBy(d => d.Rating).ToList();
                 else if (sortByRating == 2)
-                    drinksList.OrderByDescending(d => d.Rating);
+                    drinksList = drinksList.OrderByDescending(d => d.Rating).ToList();
             }
 
             return drinksList;
