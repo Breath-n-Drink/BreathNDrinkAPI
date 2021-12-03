@@ -40,13 +40,17 @@ namespace BreathNDrinkAPI.Managers
 
         public void addDrinker(string name)
         {
-            Drinkers newDrinker = new Drinkers();
-            newDrinker.Name = name;
-            newDrinker.MaxPromille = 2;
-            _dbContext.Drinkers.Add(newDrinker);
-            _dbContext.SaveChanges();
+            var result = _dbContext.Drinkers.FirstOrDefault(r => r.Name== name);
+            if (result == null)
+            {
+                Drinkers newDrinker = new Drinkers();
+                newDrinker.Name = name;
+                newDrinker.MaxPromille = 2;
+                _dbContext.Drinkers.Add(newDrinker);
+                _dbContext.SaveChanges();
+            }
+            
         }
-        //hehj
     }
 
 }
