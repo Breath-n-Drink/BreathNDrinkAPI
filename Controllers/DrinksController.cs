@@ -19,7 +19,7 @@ namespace BreathNDrinkAPI.Controllers
     {
         [HttpPost]
         [EnableCors("allowAll")]
-        public ActionResult AddRating([FromQuery]int id, int drinkerId, int rating)
+        public ActionResult AddRating([FromQuery] int id, int drinkerId, int rating)
         {
             if (drinkerId == 0)
             {
@@ -40,9 +40,9 @@ namespace BreathNDrinkAPI.Controllers
         //}
 
         [HttpGet]
-        public List<Drink> Get([FromQuery] string id, [FromQuery] string name, [FromQuery] double bodyWeight, [FromQuery] double bloodAlcCon, [FromQuery] double maxBacRequest, [FromQuery] int gender, [FromQuery] string[] ingredients, [FromQuery] string[] notFilter, [FromQuery] double minAlcPer, [FromQuery] double maxAlcPer = 100)
+        public List<Drink> Get([FromQuery] string id, [FromQuery] string name, [FromQuery] double bodyWeight, [FromQuery] double bloodAlcCon, [FromQuery] double maxBacRequest, [FromQuery] int gender, [FromQuery] string[] ingredients, [FromQuery] string[] notFilter, [FromQuery] double minAlcPer, [FromQuery] double maxAlcPer = 100, [FromQuery] int sortByRating = 0)
         {
-            return DrinksManager.Get(id, name, bodyWeight, bloodAlcCon, maxBacRequest, gender, ingredients, notFilter, minAlcPer, maxAlcPer);
+            return DrinksManager.Get(id, name, bodyWeight, bloodAlcCon, maxBacRequest, gender, ingredients, notFilter, minAlcPer, maxAlcPer, sortByRating);
         }
         //Test
     }

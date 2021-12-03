@@ -24,7 +24,7 @@ namespace BreathNDrinkAPI.Managers
         //    return d;
         //}
 
-        public static List<Drink> Get(string id = null, string name = null, double bodyWeight = 0.0, double bloodAlcCon = 0.0, double maxBacRequest = 1.5, int gender = 0, string[] ingredients = null, string[] notFilter = null, double minAlcPer = 0, double maxAlcPer = 100)
+        public static List<Drink> Get(string id = null, string name = null, double bodyWeight = 0.0, double bloodAlcCon = 0.0, double maxBacRequest = 1.5, int gender = 0, string[] ingredients = null, string[] notFilter = null, double minAlcPer = 0, double maxAlcPer = 100, int sortByRating = 0)
         {
             List<Drink> drinksList = new();
 
@@ -77,6 +77,14 @@ namespace BreathNDrinkAPI.Managers
             }
 
             drinksList = drinksList.FindAll(d => ((d.AlcoholPercentage * 100) > minAlcPer) && ((d.AlcoholPercentage * 100) < maxAlcPer));
+
+            if (sortByRating > 0)
+            {
+                if (sortByRating == 1)
+                    drinksList.OrderBy(d => d.Rating);
+                else if (sortByRating == 2)
+                    drinksList.OrderByDescending(d => d.Rating);
+            }
 
             return drinksList;
         }
