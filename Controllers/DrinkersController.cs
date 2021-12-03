@@ -48,5 +48,11 @@ namespace BreathNDrinkAPI.Controllers
             _manager.updateDrinker(id, maxPro);
         }
 
+        [HttpPost]
+        public void Post([FromQuery] string name)
+        {
+            _manager.addDrinker(name);
+        }
+
     }
 }
