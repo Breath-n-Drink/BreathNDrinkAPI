@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using BreathNDrinkAPI.Models;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace BreathNDrinkAPI.Managers
 {
@@ -13,10 +15,28 @@ namespace BreathNDrinkAPI.Managers
             Promille result = _dbContext.Promille.ToList()[^1];
             return result.Promille1;
         }
-        public List<Promille> GetPromillleByDrinker(int drinkerId)
+        public List<Promille> GetPromillleByDrinker(int drinkerId, int page)
         {
             List<Promille> result = _dbContext.Promille.Where(p=> p.DrinkerId == drinkerId).ToList();
-            return result;
+            result.Reverse();
+            var startIndex = 0;
+            var count = 10;
+            if (page != 1)
+            {
+                startIndex = page * 10 - 10;
+            }
+
+            if ((result.Count - startIndex) < 10)
+            {
+                count = result.Count - startIndex;
+            }
+            
+            if(count <= 0)
+            {
+                return new List<Promille>();
+            }
+
+            return result.GetRange(startIndex, count);
         }
     }
 }
