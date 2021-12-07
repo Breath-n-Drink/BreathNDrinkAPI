@@ -31,6 +31,10 @@ namespace BreathNDrinkAPI.Managers
                 count = result.Count - startIndex;
             }
             
+            if(count <= 0)
+            {
+                return new List<Promille>();
+            }
 
             return result.GetRange(startIndex, count);
         }
