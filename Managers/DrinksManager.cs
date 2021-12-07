@@ -108,5 +108,18 @@ namespace BreathNDrinkAPI.Managers
             }
             
         }
+
+        public static List<Drink> GetFavorites(int drinkerId)
+        {
+            List<Drink> drinksList = new ();
+
+            List<FavoriteDrinks> favoriteList = _dbContext.FavoriteDrinks.Where(a => a.DrinkerId == drinkerId).ToList();
+            foreach (var favoriteDrink in favoriteList)
+            {
+                drinksList.Add(DrinksRetriever.GetDrinkByIdAsync(favoriteDrink.DrinkId.ToString()).Result);
+            }
+
+            return drinksList;
+        }
     }
 }

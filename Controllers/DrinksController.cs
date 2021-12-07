@@ -45,5 +45,12 @@ namespace BreathNDrinkAPI.Controllers
             return DrinksManager.Get(id, name, bodyWeight, bloodAlcCon, maxBacRequest, gender, ingredients, notFilter, minAlcPer, maxAlcPer, sortByRating);
         }
         //Test
+
+        [HttpGet]
+        [Route("Favorites")]
+        public List<Drink> GetFavorites([FromQuery] int drinkerId)
+        {
+            return DrinksManager.GetFavorites(drinkerId);
+        }
     }
 }
