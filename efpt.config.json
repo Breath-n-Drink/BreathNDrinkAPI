@@ -18,6 +18,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[favoriteDrinks]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Promille]",
          "ObjectType": 0
       },
