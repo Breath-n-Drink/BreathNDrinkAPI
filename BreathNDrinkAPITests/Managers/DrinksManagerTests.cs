@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using BreathNDrinkAPI.Managers;
+using BreathNDrinkAPI.Models;
 using BreathNDrinkClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -13,6 +14,8 @@ namespace BreathNDrinkAPITests.Managers
     [TestClass]
     public class DrinksManagerTests
     {
+        private static BreathndrinkContext _dbContext = new BreathndrinkContext();
+
         [TestMethod]
         public void GetByValidIdTest()
         {
@@ -107,6 +110,14 @@ namespace BreathNDrinkAPITests.Managers
             List<Drink> drinks = DrinksManager.Get(sortByRating: 2);
             double highestRating = drinks.Max(d => d.Rating);
             Assert.AreEqual(drinks[0].Rating, highestRating);
+        }
+
+        [TestMethod]
+        public void GetFavoritesTest()
+        {
+            int drinkList = DrinksManager.GetFavorites(3).Count();
+            int realList = _dbContext.FavoriteDrinks.Where(d => d.DrinkerId == 3).Count();
+            Assert.AreEqual(drinkList, realList);
         }
     }
 }
