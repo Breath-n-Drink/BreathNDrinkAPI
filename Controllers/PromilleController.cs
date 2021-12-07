@@ -1,4 +1,6 @@
-﻿using BreathNDrinkAPI.Managers;
+﻿using System.Collections.Generic;
+using BreathNDrinkAPI.Managers;
+using BreathNDrinkAPI.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +18,11 @@ namespace BreathNDrinkAPI.Controllers
         public double Get()
         {
             return _manager.GetPromillle();
+        }
+        [HttpGet("id=" + "{id}")]
+        public List<Promille> GetByDrinker(int id)
+        {
+            return _manager.GetPromillleByDrinker(id);
         }
 
         //Hej
