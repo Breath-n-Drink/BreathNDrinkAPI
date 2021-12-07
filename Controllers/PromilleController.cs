@@ -19,10 +19,10 @@ namespace BreathNDrinkAPI.Controllers
         {
             return _manager.GetPromillle();
         }
-        [HttpGet("id=" + "{id}")]
-        public List<Promille> GetByDrinker(int id)
+        [HttpGet("id=" + "{id}" + "page=" + "{page}")]
+        public List<Promille> GetByDrinker(int id, int page)
         {
-            return _manager.GetPromillleByDrinker(id);
+            return _manager.GetPromillleByDrinker(id, page);
         }
 
         //Hej
