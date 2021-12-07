@@ -19,6 +19,7 @@ namespace BreathNDrinkAPI.Models
         }
 
         public virtual DbSet<Drinkers> Drinkers { get; set; }
+        public virtual DbSet<FavoriteDrinks> FavoriteDrinks { get; set; }
         public virtual DbSet<Promille> Promille { get; set; }
         public virtual DbSet<Ratings> Ratings { get; set; }
 
@@ -27,7 +28,7 @@ namespace BreathNDrinkAPI.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=eksamenprojekt3sem.database.windows.net;Initial Catalog=BreathNDrink;User ID=gruppe2;Password=!SuperPassword;Connect Timeout=30;Encrypt=True;" + "MultipleActiveResultSets=True");
+                optionsBuilder.UseSqlServer("Data Source=eksamenprojekt3sem.database.windows.net;Initial Catalog=BreathNDrink;User ID=gruppe2;Password=!SuperPassword;Connect Timeout=30;Encrypt=True");
             }
         }
 
@@ -41,6 +42,20 @@ namespace BreathNDrinkAPI.Models
                     .IsRequired()
                     .HasMaxLength(32)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<FavoriteDrinks>(entity =>
+            {
+                entity.HasKey(e => e.FavoriteId)
+                    .HasName("PK__favorite__CE74FAD597002B78");
+
+                entity.ToTable("favoriteDrinks");
+
+                entity.HasOne(d => d.Drinker)
+                    .WithMany(p => p.FavoriteDrinks)
+                    .HasForeignKey(d => d.DrinkerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__favoriteD__Drink__3C34F16F");
             });
 
             modelBuilder.Entity<Promille>(entity =>

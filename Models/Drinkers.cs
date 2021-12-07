@@ -10,6 +10,7 @@ namespace BreathNDrinkAPI.Models
     {
         public Drinkers()
         {
+            FavoriteDrinks = new HashSet<FavoriteDrinks>();
             Promille = new HashSet<Promille>();
             Ratings = new HashSet<Ratings>();
         }
@@ -18,6 +19,7 @@ namespace BreathNDrinkAPI.Models
         public string Name { get; set; }
         public double? MaxPromille { get; set; }
 
+        public virtual ICollection<FavoriteDrinks> FavoriteDrinks { get; set; }
         public virtual ICollection<Promille> Promille { get; set; }
         public virtual ICollection<Ratings> Ratings { get; set; }
     }
