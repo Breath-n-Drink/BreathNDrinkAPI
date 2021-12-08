@@ -21,6 +21,12 @@ namespace BreathNDrinkAPI.Managers
             result.Reverse();
             var startIndex = 0;
             var count = 10;
+
+            if (page <= 0)
+            {
+                return result;
+            }
+
             if (page != 1)
             {
                 startIndex = page * 10 - 10;
