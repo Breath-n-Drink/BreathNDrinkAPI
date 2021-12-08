@@ -18,5 +18,13 @@ namespace BreathNDrinkAPITests.Managers
             var result = _manager.GetPromillle();
             Assert.IsNotNull(result);
         }
+
+        [TestMethod()]
+        public void GetPromilleByDrinker()
+        {
+            PromilleManager _manager = new PromilleManager();
+            var result = _manager.GetPromillleByDrinker(1, 1);
+            Assert.IsNotNull(result);
+        }
     }
 }
