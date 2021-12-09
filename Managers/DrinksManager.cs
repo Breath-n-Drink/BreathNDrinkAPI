@@ -11,6 +11,7 @@ namespace BreathNDrinkAPI.Managers
     public static class DrinksManager
     {
         private static BreathndrinkContext _dbContext = new BreathndrinkContext();
+
         //public static Drink AddDrink(Drink drink)
         //{
         //    _drinksList.Add(drink);

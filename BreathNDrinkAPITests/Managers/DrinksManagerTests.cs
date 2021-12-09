@@ -97,6 +97,7 @@ namespace BreathNDrinkAPITests.Managers
 
             Assert.AreEqual(drinks.Count, drinksFiltered.Count);
         }
+
         [TestMethod]
         public void SortDrinksByRatingAscendingTest()
         {
@@ -104,6 +105,7 @@ namespace BreathNDrinkAPITests.Managers
             double highestRating = drinks.Max(d => d.Rating);
             Assert.AreEqual(drinks[drinks.Count - 1].Rating, highestRating);
         }
+
         [TestMethod]
         public void SortDrinksByRatingDescendingTest()
         {
