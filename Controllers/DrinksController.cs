@@ -17,10 +17,17 @@ namespace BreathNDrinkAPI.Controllers
     [ApiController]
     public class DrinksController : ControllerBase
     {
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPost]
         [EnableCors("allowAll")]
         public ActionResult AddRating([FromQuery] int id, int drinkerId, int rating)
         {
+            if (id < 0 || drinkerId < 0 || rating < 0 || rating > 5)
+            {
+                return BadRequest();
+            }
             if (drinkerId == 0)
             {
                 return NotFound(drinkerId);
@@ -38,19 +45,19 @@ namespace BreathNDrinkAPI.Controllers
         //{
         //    DrinksManager.RemoveDrink(value);
         //}
-
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
-        public List<Drink> Get([FromQuery] string id, [FromQuery] string name, [FromQuery] double bodyWeight, [FromQuery] double bloodAlcCon, [FromQuery] double maxBacRequest, [FromQuery] int gender, [FromQuery] string[] ingredients, [FromQuery] string[] notFilter, [FromQuery] double minAlcPer, [FromQuery] double maxAlcPer = 100, [FromQuery] int sortByRating = 0)
+        public ActionResult<List<Drink>> Get([FromQuery] string id, [FromQuery] string name, [FromQuery] double bodyWeight, [FromQuery] double bloodAlcCon, [FromQuery] double maxBacRequest, [FromQuery] int gender, [FromQuery] string[] ingredients, [FromQuery] string[] notFilter, [FromQuery] double minAlcPer, [FromQuery] double maxAlcPer = 100, [FromQuery] int sortByRating = 0)
         {
-            return DrinksManager.Get(id, name, bodyWeight, bloodAlcCon, maxBacRequest, gender, ingredients, notFilter, minAlcPer, maxAlcPer, sortByRating);
+            return Ok(DrinksManager.Get(id, name, bodyWeight, bloodAlcCon, maxBacRequest, gender, ingredients, notFilter, minAlcPer, maxAlcPer, sortByRating));
         }
-        //Test
-
+        
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         [Route("Favorites")]
-        public List<Drink> GetFavorites([FromQuery] int drinkerId)
+        public ActionResult<List<Drink>> GetFavorites([FromQuery] int drinkerId)
         {
-            return DrinksManager.GetFavorites(drinkerId);
+            return Ok(DrinksManager.GetFavorites(drinkerId));
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BreathNDrinkAPI.Managers;
 using BreathNDrinkAPI.Models;
+using Microsoft.AspNetCore.Http;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,24 +17,33 @@ namespace BreathNDrinkAPI.Controllers
     {
 
         private readonly DrinkersManager _manager = new DrinkersManager();
+        private readonly BreathndrinkContext _context = new BreathndrinkContext();
         // GET: api/<DrinkersController>
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
-        public List<Drinkers> Get()
+        public ActionResult<List<Drinkers>> Get()
         {
-            return _manager.getDrinkers();
+            return Ok(_manager.getDrinkers());
         }
 
         // GET api/<DrinkersController>/5
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("id=" + "{id}")]
-        public Drinkers GetById(int id)
+        public ActionResult<Drinkers> GetById(int id)
         {
-            return _manager.getDrinkerById(id);
+            if (_context.Drinkers.Find(id) == null)
+            {
+                return NotFound();
+            }
+            return Ok(_manager.getDrinkerById(id));
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("name=" + "{name}")]
-        public Drinkers GetByName(string name)
+        public ActionResult<Drinkers> GetByName(string name)
         {
-            return _manager.getDrinkerByName(name);
+            return Ok(_manager.getDrinkerByName(name));
         }
 
         // POST api/<DrinkersController>
@@ -42,16 +52,20 @@ namespace BreathNDrinkAPI.Controllers
         //{
         //}
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] double maxPro)
+        public ActionResult Put(int id, [FromBody] double maxPro)
         {
             _manager.updateDrinker(id, maxPro);
+            return Ok();
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPost]
-        public void Post([FromQuery] string name)
+        public ActionResult Post([FromQuery] string name)
         {
             _manager.addDrinker(name);
+            return Ok();
         }
 
     }

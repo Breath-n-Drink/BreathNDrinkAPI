@@ -103,7 +103,7 @@ namespace BreathNDrinkAPITests.Managers
         {
             List<Drink> drinks = DrinksManager.Get(sortByRating: 1);
             double highestRating = drinks.Max(d => d.Rating);
-            Assert.AreEqual(drinks[drinks.Count - 1].Rating, highestRating);
+            Assert.AreEqual(drinks[^1].Rating, highestRating);
         }
 
         [TestMethod]
