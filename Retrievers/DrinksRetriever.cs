@@ -73,7 +73,7 @@ namespace BreathNDrinkAPI.Retrievers
 
         public static Drink ConvertDrink(TempDrink tempDrink)
         {
-            Drink drink = new Drink(_allRatings.FindAll(r => r.DrinkId.Equals(tempDrink.IdDrink)));
+            Drink drink = new Drink(_allRatings.FindAll(r => r.DrinkId.Equals(int.Parse(tempDrink.IdDrink))));
 
             if (tempDrink.StrAlcoholic.ToLower().Equals("alcoholic") || tempDrink.StrAlcoholic.ToLower().Equals("optional alcohol"))
                 drink.Alcoholic = true;
