@@ -15,9 +15,18 @@ namespace BreathNDrinkAPI.Retrievers
     {
         private static HttpClient client = new ();
         private static string path = "http://www.thecocktaildb.com/api/json/v2/9973533/";
+        private static BreathndrinkContext _context = new BreathndrinkContext();
+        private static List<Ratings> _allRatings;
+
+        static DrinksRetriever()
+        {
+            _allRatings = _context.Ratings.ToList();
+        }
 
         public static async Task<List<Drink>> GetDrinksByNameAsync(string name)
         {
+            _allRatings = _context.Ratings.ToList();
+
             HttpResponseMessage response = await client.GetAsync(path + $"search.php?s={name}");
             TempDrinkList tempDrinkList = null;
             if (response.IsSuccessStatusCode)
@@ -36,6 +45,8 @@ namespace BreathNDrinkAPI.Retrievers
 
         public static async Task<Drink> GetDrinkByIdAsync(string id)
         {
+            _allRatings = _context.Ratings.ToList();
+
             HttpResponseMessage response = await client.GetAsync(path + $"lookup.php?i={id}");
             TempDrinkList tempDrinkList = null;
             TempDrink tempDrink = new();
@@ -62,7 +73,7 @@ namespace BreathNDrinkAPI.Retrievers
 
         public static Drink ConvertDrink(TempDrink tempDrink)
         {
-            Drink drink = new Drink();
+            Drink drink = new Drink(_allRatings.FindAll(r => r.DrinkId.Equals(int.Parse(tempDrink.IdDrink))));
 
             if (tempDrink.StrAlcoholic.ToLower().Equals("alcoholic") || tempDrink.StrAlcoholic.ToLower().Equals("optional alcohol"))
                 drink.Alcoholic = true;

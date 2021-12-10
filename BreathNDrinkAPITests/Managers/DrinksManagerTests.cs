@@ -97,19 +97,27 @@ namespace BreathNDrinkAPITests.Managers
 
             Assert.AreEqual(drinks.Count, drinksFiltered.Count);
         }
+
         [TestMethod]
         public void SortDrinksByRatingAscendingTest()
         {
             List<Drink> drinks = DrinksManager.Get(sortByRating: 1);
             double highestRating = drinks.Max(d => d.Rating);
-            Assert.AreEqual(drinks[^1].Rating, highestRating);
+            if (highestRating > drinks.Min(d => d.Rating))
+                Assert.AreEqual(drinks[^1].Rating, highestRating);
+            else
+                Assert.Fail();
         }
+
         [TestMethod]
         public void SortDrinksByRatingDescendingTest()
         {
             List<Drink> drinks = DrinksManager.Get(sortByRating: 2);
             double highestRating = drinks.Max(d => d.Rating);
-            Assert.AreEqual(drinks[0].Rating, highestRating);
+            if (highestRating > drinks.Min(d => d.Rating))
+                Assert.AreEqual(drinks[^1].Rating, highestRating);
+            else
+                Assert.Fail();
         }
 
         [TestMethod]
