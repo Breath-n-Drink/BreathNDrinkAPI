@@ -115,7 +115,7 @@ namespace BreathNDrinkAPITests.Managers
             List<Drink> drinks = DrinksManager.Get(sortByRating: 2);
             double highestRating = drinks.Max(d => d.Rating);
             if (highestRating > drinks.Min(d => d.Rating))
-                Assert.AreEqual(drinks[^1].Rating, highestRating);
+                Assert.AreEqual(drinks[0].Rating, highestRating);
             else
                 Assert.Fail();
         }
