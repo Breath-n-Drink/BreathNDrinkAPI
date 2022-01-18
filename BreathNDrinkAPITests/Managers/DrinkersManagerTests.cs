@@ -27,7 +27,7 @@ namespace BreathNDrinkAPI.Managers.Tests
         [TestMethod()]
         public void getDrinkerByIdTest()
         {
-            Drinkers drinker = drinkersManager.getDrinkerById(1);
+            Drinkers drinker = drinkersManager.getDrinkerById(6);
             Assert.AreEqual("Mads", drinker.Name);
         }
 
@@ -35,20 +35,20 @@ namespace BreathNDrinkAPI.Managers.Tests
         public void getDrinkerByNameTest()
         {
             Drinkers drinker = drinkersManager.getDrinkerByName("Mads");
-            Assert.AreEqual(1, drinker.Id);
+            Assert.AreEqual(6, drinker.Id);
         }
 
         [TestMethod()]
         public void updateDrinkerTest()
         {
-            Drinkers drinker = drinkersManager.getDrinkerById(4);
+            Drinkers drinker = drinkersManager.getDrinkerById(3);
             double? promille = drinker.MaxPromille;
 
-            drinkersManager.updateDrinker(4, 4);
+            drinkersManager.updateDrinker(3, 4);
 
-            Assert.AreNotEqual(promille, drinkersManager.getDrinkerById(4));
+            Assert.AreNotEqual(promille, drinkersManager.getDrinkerById(3));
 
-            drinkersManager.updateDrinker(4, 10);
+            drinkersManager.updateDrinker(3, 10);
         }
 
         [TestMethod()]

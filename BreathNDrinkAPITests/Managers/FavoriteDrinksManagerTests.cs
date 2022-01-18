@@ -19,7 +19,7 @@ namespace BreathNDrinkAPI.Managers.Tests
         {
             FavoriteDrinks newDrink = new FavoriteDrinks();
             newDrink.DrinkId = 111111;
-            newDrink.DrinkerId = 1;
+            newDrink.DrinkerId = 3;
 
             int favorites = _dbContext.FavoriteDrinks.Count();
             FavoriteDrinksManager.AddFavorite(newDrink.DrinkId, newDrink.DrinkerId);
@@ -34,7 +34,7 @@ namespace BreathNDrinkAPI.Managers.Tests
         {
             FavoriteDrinks newDrink = new FavoriteDrinks();
             newDrink.DrinkId = 111111;
-            newDrink.DrinkerId = 1;
+            newDrink.DrinkerId = 3;
             FavoriteDrinksManager.AddFavorite(newDrink.DrinkId, newDrink.DrinkerId);
 
             List<FavoriteDrinks> list = _dbContext.FavoriteDrinks.ToList();

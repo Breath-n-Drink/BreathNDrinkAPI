@@ -32,10 +32,10 @@ namespace BreathNDrinkAPITests.Managers
         {
             PromilleManager _manager = new PromilleManager();
 
-            var allByDrinker = _manager.GetPromillleByDrinker(1, -1);
-            var result = _manager.GetPromillleByDrinker(1, 2);
+            var allByDrinker = _manager.GetPromillleByDrinker(3, -1);
+            var result = _manager.GetPromillleByDrinker(3, 1);
             
-            Assert.AreEqual(allByDrinker[10], result[0]);
+            Assert.AreEqual(allByDrinker[0], result[0]);
         }
     }
 }
